@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_account,account.account,account.model_account_account,prestamos.group_prestamos,1,0,0,0
+access_prestamos_prestamos,prestamos.prestamos,model_prestamos_prestamos,prestamos.group_prestamos,1,1,1,1
+access_lineas_lineas,lineas.lineas,model_lineas_lineas,prestamos.group_prestamos,1,1,1,1
+access_res_partner,res.partner,base.model_res_partner,prestamos.group_prestamos,1,1,1,1
+access_res_user,res.user,base.model_res_users,prestamos.group_prestamos,1,1,1,1
+
+

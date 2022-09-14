@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_prestamos" model="res.groups">
+            <field name="name">Administrador</field>
+            <field name="category_id" ref="prestamos_category"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            <field name="comment">the user will have access to his own data in the sales application.</field>
+        </record>
+    </data>
+</odoo>

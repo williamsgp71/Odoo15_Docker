@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <!-- explicit list view definition -->
+  <record id="prestamos_tree_view" model="ir.ui.view">
+    <field name="name">prestamos.tree.view</field>
+    <field name="model">prestamos.prestamos</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="partner_id"/>
+        <field name="amount_total"/>
+        <field name="fees"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="prestamos_form_view" model="ir.ui.view">
+    <field name="name">prestamos.form.view</field>
+    <field name="model">prestamos.prestamos</field>
+    <field name="arch" type="xml">
+      <form string="">
+        <sheet>
+          <group>
+            <field name="name" invisible="1"/>
+            <field name="partner_id" required="1"/>
+            <field name="fees" required="1"/>
+            <field name="amount_total" required="1"/>
+            <field name="date" required="1"/>
+          </group>
+          <group>
+            <button name="action_calcular_cuota" type="object" class="btn-primary" string="Calcular">
+            </button>
+          </group>
+          <notebook>
+            <page name="Lineids" string="Cuotas">
+              <field name="line_ids">
+                <tree create="false" delete="false">
+                  <field name="payment_date"/>
+                  <field name="amount"/>
+                </tree>
+                <form>
+                  <group>
+                  <field name="payment_date"/>
+                  <field name="amount"/>
+                  </group>
+                </form>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="prestamos_search_view" model="ir.ui.view">
+    <field name="name">prestamos.search.view</field>
+    <field name="model">prestamos.prestamos</field>
+    <field name="arch" type="xml">
+      <search string="">
+        <field name="name" />
+      </search>
+    </field>
+  </record>
+  <!-- actions opening views on models -->
+
+  <record id="prestamos_action_window" model="ir.actions.act_window">
+    <field name="name">Prestamos</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">prestamos.prestamos</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="prestamos_search_view"/>
+    <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('prestamos_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('prestamos_form_view')}),
+            ]"/>
+  </record>
+
+  <menuitem id="Prestamo_menu" name="Prestamos" parent="account.menu_finance" action="prestamos_action_window" groups="prestamos.group_prestamos" sequence="1"/>
+
+</odoo>
