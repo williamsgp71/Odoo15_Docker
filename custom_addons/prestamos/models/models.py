@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api
 from dateutil.relativedelta import relativedelta
+import numpy as np
 class Prestamos(models.Model):
     _name = 'prestamos.prestamos'
     _description = 'Prestamos'
@@ -18,6 +19,7 @@ class Prestamos(models.Model):
         cantidad = self.amount_total / self.fees
         cuotas = []
         self.line_ids = [(6, 0, [])]
+        # import pdb;pdb.set_trace()
         for rec in range(1,self.fees+1):
             new_date = self.date + relativedelta(months=rec)
             cuotas.append((0, 0, {'payment_date': new_date, 'amount': cantidad}))

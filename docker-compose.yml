@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   web:
-    image: odoo:15.0
+    build: .
     depends_on:
       - db
     ports:
@@ -11,6 +11,8 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
       - ./custom_addons:/mnt/extra-addons2
+    stdin_open: true
+    tty: true
   db:
     image: postgres:13
     environment:
